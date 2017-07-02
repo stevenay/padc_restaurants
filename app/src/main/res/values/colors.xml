@@ -1,6 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+
+    <color name="theme_primary">@color/md_red_500</color>
+    <color name="theme_primary_dark">@color/md_red_700</color>
+    <color name="theme_accent">@color/md_orange_a200</color>
+    <color name="theme_accent_dark">@color/md_orange_a400</color>
+
+    <!-- App Color Palette -->
+    <color name="app_blue_grey">@color/md_blue_grey_500</color>
+    <color name="app_dark_blue_grey">@color/md_blue_grey_700</color>
+    <color name="app_light_blue_grey">@color/md_blue_grey_300</color>
+    <color name="app_red">@color/md_red_a200</color>
+    <color name="app_dark_red">@color/md_red_a400</color>
+    <color name="app_light_red">@color/md_red_a100</color>
+    <color name="app_black">@color/md_black</color>
+    <color name="app_white">@color/md_white</color>
+
+    <!-- App Primary Text Colors (Dark text). -->
+    <color name="app_transparent">#00000000</color>
+    <color name="app_error">#ffdd2c00</color>
+    <color name="app_primary_text">#de000000</color> <!-- black 87% -->
+    <color name="app_secondary_text">#8a000000</color> <!-- black 54% -->
+    <color name="app_disabled_text">#61000000</color> <!-- black 38% -->
+    <color name="app_hint_text">#61000000</color> <!-- black 38 % -->
+    <color name="app_divider">#1f000000</color> <!-- black 12% -->
+
+    <!-- App Primary Text Colors (Light text). -->
+    <color name="app_primary_text_inverse">#deffffff</color> <!-- white 87% -->
+    <color name="app_secondary_text_inverse">#b3ffffff</color> <!-- white 70% -->
+    <color name="app_disabled_text_inverse">#80ffffff</color> <!-- white 50% -->
+    <color name="app_hint_text_inverse">#80ffffff</color> <!-- white 50% -->
+    <color name="app_divider_inverse">#1fffffff</color> <!-- white 12% -->
+
+    <!-- App Icon Colors (Dark icons) -->
+    <color name="app_active_icon">#8a000000</color> <!-- black 54% -->
+    <color name="app_inactive_icon">#61000000</color> <!-- black 38 % -->
+
+    <!-- App Icon Colors (Light icons) -->
+    <color name="app_active_icon_inverse">#ffffffff</color> <!-- white 100% -->
+    <color name="app_inactive_icon_inverse">#80ffffff</color> <!-- white 50% -->
+
 </resources>

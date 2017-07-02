@@ -1,16 +1,11 @@
 package com.naylinaung.padc_week3_restaurant.data.models;
 
 import com.naylinaung.padc_week3_restaurant.data.agents.RestaurantDataAgent;
+import com.naylinaung.padc_week3_restaurant.data.agents.retrofit.RetrofitDataAgent;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
-
-import xyz.aungpyaephyo.padc.myanmarattractions.data.agents.AttractionDataAgent;
-import xyz.aungpyaephyo.padc.myanmarattractions.data.agents.HttpUrlConnectionDataAgent;
-import xyz.aungpyaephyo.padc.myanmarattractions.data.agents.OfflineDataAgent;
-import xyz.aungpyaephyo.padc.myanmarattractions.data.agents.OkHttpDataAgent;
-import xyz.aungpyaephyo.padc.myanmarattractions.data.agents.retrofit.RetrofitDataAgent;
 
 /**
  * Created by naylinaung on 7/15/16.
