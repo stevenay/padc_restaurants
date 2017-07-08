@@ -25,12 +25,24 @@ public class RestaurantModel extends BaseModel {
         super();
     }
 
-    public static RestaurantModel getInstance(Context context) {
+    public static void init(Context context) {
         if (objInstance == null) {
             objInstance = new RestaurantModel();
-            objInstance.mContext = context;
         }
+
+        objInstance.mContext = context;
+    }
+
+    public static RestaurantModel getInstance() {
+        if (objInstance == null) {
+            throw new RuntimeException("Need to init the model first before uses it.");
+        }
+
         return objInstance;
+    }
+
+    public void setContext(Context context) {
+        mContext = context;
     }
 
     public void loadRestaurants() {
@@ -39,6 +51,7 @@ public class RestaurantModel extends BaseModel {
 
     @Subscribe(threadMode = ThreadMode.BACKGROUND)
     public void receiveRestaurantList(DataEvent.RestaurantDataLoadedEvent event) {
+
         // RestaurantVO.saveRestaurants(mContext, event.getRestaurantList());
     }
 

@@ -85,7 +85,7 @@ public class RestaurantsFragment extends Fragment {
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                RestaurantModel.getInstance(getContext()).loadRestaurants();
+                RestaurantModel.getInstance().loadRestaurants();
             }
         });
 

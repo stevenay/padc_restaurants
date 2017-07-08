@@ -20,7 +20,8 @@ public class RestaurantApp extends Application {
     public void onCreate() {
         super.onCreate();
 
-        RestaurantModel.getInstance(getApplicationContext()).loadRestaurants();
+        RestaurantModel.init(getApplicationContext());
+        RestaurantModel.getInstance().loadRestaurants();
     }
 
 }
