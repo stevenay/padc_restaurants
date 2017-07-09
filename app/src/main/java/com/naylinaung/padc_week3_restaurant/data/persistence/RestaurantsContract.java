@@ -16,7 +16,7 @@ import com.naylinaung.padc_week3_restaurant.RestaurantApp;
  * {@code int} {@link android.provider.BaseColumns#_ID} values, which are prone to shuffle during sync.
  */
 
-public class RestaurantContract {
+public class RestaurantsContract {
 
     public static final String CONTENT_AUTHORITY = RestaurantApp.class.getPackage().getName();
     public static final Uri BASE_CONTENT_URI = Uri.parse("content://" + CONTENT_AUTHORITY);
@@ -27,9 +27,10 @@ public class RestaurantContract {
 
     interface TagsColumns {
         String COLUMN_TAG_NAME = "tag_name";
+        String COLUMN_RESTAURANT_TITLE = "restaurant_title";
     }
 
-    public static final class RestaurantEntry implements BaseColumns {
+    public static final class RestaurantsEntry implements BaseColumns {
         public static final Uri CONTENT_URI = BASE_CONTENT_URI.buildUpon().appendPath(PATH_RESTAURANTS).build();
 
         public static final String DIR_TYPE =
@@ -65,7 +66,7 @@ public class RestaurantContract {
 
     }
 
-    public static final class TagEntry implements TagsColumns, BaseColumns {
+    public static final class TagsEntry implements TagsColumns, BaseColumns {
         public static final Uri CONTENT_URI =
                 BASE_CONTENT_URI.buildUpon().appendPath(PATH_TAGS).build();
 
@@ -85,12 +86,22 @@ public class RestaurantContract {
             return ContentUris.withAppendedId(CONTENT_URI, tagId);
         }
 
+        public static Uri buildTagUriWithRestaurantTitle(String restaurantTitle) {
+            return CONTENT_URI.buildUpon()
+                    .appendQueryParameter(COLUMN_RESTAURANT_TITLE, restaurantTitle)
+                    .build();
+        }
+
         public static String getTagId(Uri uri) {
             return uri.getPathSegments().get(1);
         }
+
+        public static String getRestaurantTitleFromParam(Uri uri) {
+            return uri.getQueryParameter(COLUMN_RESTAURANT_TITLE);
+        }
     }
 
-    public static final class RestaurantTagEntry implements BaseColumns {
+    /*public static final class RestaurantTagEntry implements BaseColumns {
         public static final Uri CONTENT_URI =
                 BASE_CONTENT_URI.buildUpon().appendPath(PATH_RESTAURANT_TAGS).build();
 
@@ -102,21 +113,21 @@ public class RestaurantContract {
 
         public static final String TABLE_NAME = "restaurant_tags";
 
-        public static final String COLUMN_TITLE = RestaurantEntry.COLUMN_TITLE;
-        public static final String COLUMN_TAG_NAME = TagEntry.COLUMN_TAG_NAME;
+        public static final String COLUMN_TITLE = RestaurantsEntry.COLUMN_TITLE;
+        public static final String COLUMN_TAG_NAME = TagsEntry.COLUMN_TAG_NAME;
 
-        public static final String REF_RESTAURANT_TITLE = "REFERENCES " +
-                RestaurantEntry.TABLE_NAME + "(" +
-                RestaurantEntry.COLUMN_TITLE + ")";
+        public static final String REFERENCES_RESTAURANT_TITLE = "REFERENCES " +
+                RestaurantsEntry.TABLE_NAME + "(" +
+                RestaurantsEntry.COLUMN_TITLE + ")";
 
-        public static final String REF_TAG_NAME = "REFERENCES " +
-                TagEntry.TABLE_NAME + "(" +
-                TagEntry.COLUMN_TAG_NAME + ")";
+        public static final String REFERENCES_TAG_NAME = "REFERENCES " +
+                TagsEntry.TABLE_NAME + "(" +
+                TagsEntry.COLUMN_TAG_NAME + ")";
 
         public static Uri buildRestaurantTagUri(long id) {
             return ContentUris.withAppendedId(CONTENT_URI, id);
         }
-    }
+    }*/
 
 
 }

@@ -3,6 +3,7 @@ package com.naylinaung.padc_week3_restaurant;
 import android.app.Application;
 import android.content.Context;
 
+import com.facebook.stetho.Stetho;
 import com.naylinaung.padc_week3_restaurant.data.models.RestaurantModel;
 
 /**
@@ -20,6 +21,10 @@ public class RestaurantApp extends Application {
     public void onCreate() {
         super.onCreate();
 
+        // Stetho Initialization
+        Stetho.initializeWithDefaults(this);
+
+        // Restaurant Model Initialization
         RestaurantModel.init(getApplicationContext());
         RestaurantModel.getInstance().loadRestaurants();
     }

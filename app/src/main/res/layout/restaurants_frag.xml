@@ -6,11 +6,12 @@
               tools:context="com.naylinaung.padc_week3_restaurant.restaurants.RestaurantsFragment">
 
     <TextView
+        android:id="@+id/tv_restaurant_count"
         style="@style/Base.TextAppearance.AppCompat.Body1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/keyline_1"
-        android:text="68 restaurants deliver to you"/>
+        tools:text="68 restaurants deliver to you"/>
 
     <View
         android:layout_width="match_parent"

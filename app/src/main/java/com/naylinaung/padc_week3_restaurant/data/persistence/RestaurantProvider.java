@@ -1,7 +1,6 @@
 package com.naylinaung.padc_week3_restaurant.data.persistence;
 
 import android.content.ContentProvider;
-import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.UriMatcher;
@@ -11,10 +10,13 @@ import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
+
+import com.naylinaung.padc_week3_restaurant.data.utils.RestaurantsConstants;
 
 /**
  * Created by NayLinAung on 6/25/2017.
- * {@link android.content.ContentProvider} that stores {@link RestaurantContract} data.
+ * {@link android.content.ContentProvider} that stores {@link RestaurantsContract} data.
  * Data is usually inserted by {@link com.naylinaung.padc_week3_restaurant.data.models.RestaurantModel}, and
  * queried using {@link android.app.LoaderManager} pattern.
  */
@@ -42,7 +44,7 @@ public class RestaurantProvider extends ContentProvider {
         int matchUri = sUriMatcher.match(uri);
         switch (matchUri) {
             case RESTAURANT:
-                queryCursor = mRestaurantDbHelper.getReadableDatabase().query(RestaurantContract.RestaurantEntry.TABLE_NAME,
+                queryCursor = mRestaurantDbHelper.getReadableDatabase().query(RestaurantsContract.RestaurantsEntry.TABLE_NAME,
                         projection,
                         selection,
                         selectionArgs,
@@ -50,8 +52,13 @@ public class RestaurantProvider extends ContentProvider {
                         null,
                         sortOrder);
                 break;
-            case RESTAURANT_TAG:
-                queryCursor = mRestaurantDbHelper.getReadableDatabase().query(RestaurantContract.RestaurantTagEntry.TABLE_NAME,
+            case TAG:
+                String restaurantTitle = RestaurantsContract.TagsEntry.getRestaurantTitleFromParam(uri);
+                if (!TextUtils.isEmpty(restaurantTitle)) {
+                    selection = RestaurantsContract.TagsEntry.COLUMN_RESTAURANT_TITLE + " = ?";
+                    selectionArgs = new String[]{ restaurantTitle };
+                }
+                queryCursor = mRestaurantDbHelper.getReadableDatabase().query(RestaurantsContract.TagsEntry.TABLE_NAME,
                         projection,
                         selection,
                         selectionArgs,
@@ -77,11 +84,9 @@ public class RestaurantProvider extends ContentProvider {
         final int matchUri = sUriMatcher.match(uri);
         switch (matchUri) {
             case RESTAURANT:
-                return RestaurantContract.RestaurantEntry.DIR_TYPE;
-            case RESTAURANT_TAG:
-                return RestaurantContract.RestaurantTagEntry.DIR_TYPE;
+                return RestaurantsContract.RestaurantsEntry.DIR_TYPE;
             case TAG:
-                return RestaurantContract.TagEntry.ITEM_TYPE;
+                return RestaurantsContract.TagsEntry.ITEM_TYPE;
             default:
                 throw new UnsupportedOperationException("Unknown uri : " + uri);
         }
@@ -97,18 +102,9 @@ public class RestaurantProvider extends ContentProvider {
 
         switch (matchUriCode) {
             case RESTAURANT: {
-                long _id = db.insert(RestaurantContract.RestaurantEntry.TABLE_NAME, null, values);
+                long _id = db.insert(RestaurantsContract.RestaurantsEntry.TABLE_NAME, null, values);
                 if (_id > 0) {
-                    insertedUri = RestaurantContract.RestaurantEntry.buildRestaurantUri(_id);
-                } else {
-                    throw new SQLException("Failed to insert row into " + uri);
-                }
-                break;
-            }
-            case RESTAURANT_TAG: {
-                long _id = db.insert(RestaurantContract.RestaurantEntry.TABLE_NAME, null, values);
-                if (_id > 0) {
-                    insertedUri = RestaurantContract.RestaurantTagEntry.buildRestaurantTagUri(_id);
+                    insertedUri = RestaurantsContract.RestaurantsEntry.buildRestaurantUri(_id);
                 } else {
                     throw new SQLException("Failed to insert row into " + uri);
                 }
@@ -186,9 +182,9 @@ public class RestaurantProvider extends ContentProvider {
     private static UriMatcher buildUriMatcher() {
         final UriMatcher uriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
 
-        uriMatcher.addURI(RestaurantContract.CONTENT_AUTHORITY, RestaurantContract.PATH_RESTAURANTS, RESTAURANT);
-        uriMatcher.addURI(RestaurantContract.CONTENT_AUTHORITY, RestaurantContract.PATH_TAGS, TAG);
-        uriMatcher.addURI(RestaurantContract.CONTENT_AUTHORITY, RestaurantContract.PATH_RESTAURANT_TAGS, RESTAURANT_TAG);
+        uriMatcher.addURI(RestaurantsContract.CONTENT_AUTHORITY, RestaurantsContract.PATH_RESTAURANTS, RESTAURANT);
+        uriMatcher.addURI(RestaurantsContract.CONTENT_AUTHORITY, RestaurantsContract.PATH_TAGS, TAG);
+        uriMatcher.addURI(RestaurantsContract.CONTENT_AUTHORITY, RestaurantsContract.PATH_RESTAURANT_TAGS, RESTAURANT_TAG);
 
         return uriMatcher;
     }
@@ -198,11 +194,9 @@ public class RestaurantProvider extends ContentProvider {
 
         switch (matchUriCode) {
             case RESTAURANT:
-                return RestaurantContract.RestaurantEntry.TABLE_NAME;
-            case RESTAURANT_TAG:
-                return RestaurantContract.RestaurantTagEntry.TABLE_NAME;
+                return RestaurantsContract.RestaurantsEntry.TABLE_NAME;
             case TAG:
-                return RestaurantContract.RestaurantTagEntry.TABLE_NAME;
+                return RestaurantsContract.TagsEntry.TABLE_NAME;
             default:
                 throw new UnsupportedOperationException("Unknown uri : " + uri);
         }

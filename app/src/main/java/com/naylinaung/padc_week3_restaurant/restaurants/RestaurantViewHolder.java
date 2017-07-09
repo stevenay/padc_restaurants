@@ -1,5 +1,7 @@
 package com.naylinaung.padc_week3_restaurant.restaurants;
 
+import android.os.Build;
+import android.text.Html;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
@@ -46,12 +48,19 @@ public class RestaurantViewHolder extends BaseViewHolder<RestaurantVO> {
         mData = data;
         rbRating.setRating(data.getAverageRatingValue());
         tvRestaurantTitle.setText(data.getTitle());
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            tvLeadingInMin.setText(Html.fromHtml("delivers in <b>" + data.getLeadTimeInMin() + " min.</b>", Html.FROM_HTML_MODE_COMPACT));
+        } else {
+            tvLeadingInMin.setText(Html.fromHtml("delivers in <b>" + data.getLeadTimeInMin() + " min.</b>"));
+        }
 
         if (data.getTags() != null && data.getTags().length > 0)
             tvTags.setText(TextUtils.join(", ", data.getTags()));
 
         if (data.getIsAd())
             ivAd.setVisibility(View.VISIBLE);
+        else
+            ivAd.setVisibility(View.INVISIBLE);
     }
 
     @Override

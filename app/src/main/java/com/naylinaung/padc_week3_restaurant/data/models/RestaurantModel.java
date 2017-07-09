@@ -41,18 +41,13 @@ public class RestaurantModel extends BaseModel {
         return objInstance;
     }
 
-    public void setContext(Context context) {
-        mContext = context;
-    }
-
     public void loadRestaurants() {
         dataAgent.loadRestaurants();
     }
 
     @Subscribe(threadMode = ThreadMode.BACKGROUND)
     public void receiveRestaurantList(DataEvent.RestaurantDataLoadedEvent event) {
-
-        // RestaurantVO.saveRestaurants(mContext, event.getRestaurantList());
+        RestaurantVO.saveRestaurants(mContext, event.getRestaurantList());
     }
 
 }

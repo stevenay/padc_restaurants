@@ -4,16 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingBottom="@dimen/keyline_1"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/keyline_1">
 
     <ImageView
         android:id="@+id/iv_ad"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:visibility="gone"
-        android:src="@drawable/ad_mark"/>
+        android:src="@drawable/ad_mark"
+        android:visibility="gone"/>
 
     <ImageView
         android:id="@+id/iv_restaurant"
@@ -61,8 +61,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/spacing_normal"
-            android:src="@drawable/sample_restaurant_type_mark"
-            />
+            android:src="@drawable/sample_restaurant_type_mark"/>
 
         <ImageView
             android:id="@+id/iv_halal"
@@ -70,8 +69,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/spacing_normal"
             android:layout_marginTop="@dimen/spacing_normal"
-            android:src="@drawable/sample_restaurant_type_mark"
-            />
+            android:src="@drawable/sample_restaurant_type_mark"/>
 
         <ImageView
             android:id="@+id/iv_kitchen"
@@ -79,22 +77,19 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/spacing_normal"
             android:layout_marginTop="@dimen/spacing_normal"
-            android:src="@drawable/sample_restaurant_type_mark"
-            />
+            android:src="@drawable/sample_restaurant_type_mark"/>
 
         <TextView
             android:id="@+id/tv_leading_in_min"
+            style="@style/Base.TextAppearance.AppCompat.Caption"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:layout_marginTop="@dimen/spacing_normal"
+            android:layout_weight="1"
             android:paddingRight="@dimen/spacing_normal"
             android:textAlignment="textEnd"
-            tools:text="delivers in 40 min."
-            style="@style/Base.TextAppearance.AppCompat.Caption"/>
+            tools:text="delivers in 40 min."/>
 
     </LinearLayout>
-
-
 
 </RelativeLayout>
